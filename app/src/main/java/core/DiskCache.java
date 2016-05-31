@@ -1,4 +1,4 @@
-package model;
+package core;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;

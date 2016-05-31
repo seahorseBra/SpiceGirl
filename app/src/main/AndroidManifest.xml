@@ -7,12 +7,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:name="core.CApp"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
-        <activity android:name="ui.activity.MainActivity">
-=======
+
         <activity android:name="view.MainActivity">
->>>>>>> origin/master
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

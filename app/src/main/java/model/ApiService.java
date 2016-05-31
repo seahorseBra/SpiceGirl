@@ -1,5 +1,7 @@
 package model;
 
+import javaBean.ImageTypeResult;
+import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -11,9 +13,9 @@ public interface ApiService {
 
 
     @GET("/pic/pic_type")
-    public void getImageType();
+    Call<ImageTypeResult> getImageType();
 
-    @GET("/pic/pic_search/{type}/{page}")
-    public void getImage(@Path("type") String type, @Path("page") String page, Callback<> callback);
+//    @GET("/pic/pic_search/{type}/{page}")
+//    Call<> getImage(@Path("type") String type, @Path("page") String page, Callback<> callback);
 
 }

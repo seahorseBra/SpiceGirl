@@ -1,6 +1,5 @@
 package view;
 
-import android.content.pm.ProviderInfo;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -14,14 +13,14 @@ import presenter.MainPresenter;
 public class MainActivity extends BaseActivity<MainPresenter> implements IMainView {
 
     private static final String TAG = "MainActivity";
-    private static int page = 1;
+    private static int page = 2;
     private static int type = 4002;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        mPresenter.getAllImageType();
-        reFreshData();
+        getMoreData();
     }
 
     @Override
@@ -37,13 +36,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         }
         for (int i = 0; i < listBean.getList().size(); i++) {
 
-            Log.d(TAG, "addAllImageType() called with: " + "listBean = [" + listBean.getList().get(i).toString() + "]");
+
         }
     }
 
     @Override
     public void failMassage(String msg) {
-        Log.d(TAG, "failMassage() called with: " + "msg = [" + msg + "]");
+
     }
 
     @Override
@@ -58,8 +57,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
 
     @Override
     public void addPrettyGirlDate(PrettyGrilImage.ShowapiResBodyBean.PagebeanBean pagebeanBean) {
-        for (int i = 0; i < pagebeanBean.getContentlist().size(); i++) {
-            Log.d(TAG, "addPrettyGirlDate() called with: " + "pagebeanBean = [" + pagebeanBean.getContentlist().get(i).getTitle() + "]");
+        for (int i = 0; i < pagebeanBean.contentlist.size(); i++) {
+            Log.d(TAG, "addPrettyGirlDate() called with: " + "pagebeanBean = [" + pagebeanBean.contentlist.get(i).list.get(0).big+ "]");
         }
     }
 }

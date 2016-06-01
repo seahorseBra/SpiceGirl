@@ -8,8 +8,13 @@ import android.util.Log;
 import com.google.gson.internal.Streams;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -39,7 +44,7 @@ public class ApiDel {
     private ApiService apiService;
 
     public static ApiDel newInstance() {
-        if (instance ==null) {
+        if (instance == null) {
             instance = new ApiDel();
         }
         return instance;
@@ -58,13 +63,14 @@ public class ApiDel {
 
     /**
      * 发送消息到主线程
+     *
      * @param receive
      * @param data
      * @param isSuccessful
      * @param e
      * @param <T>
      */
-    private <T>void postResultToMainThread(final ApiDataReceiveCallback receive, final T data, final boolean isSuccessful, final Exception e) {
+    private <T> void postResultToMainThread(final ApiDataReceiveCallback receive, final T data, final boolean isSuccessful, final Exception e) {
         mMianHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -73,6 +79,7 @@ public class ApiDel {
         });
 
     }
+
     /**
      * 初始化亲求service
      */
@@ -107,16 +114,17 @@ public class ApiDel {
 
     /**
      * 获取所有图片类型
+     *
      * @param callBacks
      */
-    public  void getAllImageype(final CallBacks<ImageTypeResult.ShowapiResBodyBean, String> callBacks){
+    public void getAllImageype(final CallBacks<ImageTypeResult.ShowapiResBodyBean, String> callBacks) {
         final String IMAGE_TYPE_KEY = "spice_girl_type";
         mPreloadExecutor.execute(new Runnable() {
             @Override
             public void run() {
                 Type type = new TypeToken<CacheObj<ImageTypeResult.ShowapiResBodyBean>>() {
                 }.getType();
-                CacheObj<ImageTypeResult.ShowapiResBodyBean> obj = mDiskCache.getCacheObj(IMAGE_TYPE_KEY,type);
+                CacheObj<ImageTypeResult.ShowapiResBodyBean> obj = mDiskCache.getCacheObj(IMAGE_TYPE_KEY, type);
                 if (obj != null) {
                     if (obj != null && !obj.getT().getList().isEmpty() && !obj.isOutOfDate(CacheTimeManager.IMAGE_TYPE_CACHETIME)) {
                         callBacks.getSuccess(obj.getT());
@@ -128,13 +136,13 @@ public class ApiDel {
                     public void onResponse(Call<ImageTypeResult> call, retrofit2.Response<ImageTypeResult> response) {
                         if (response.body() != null && !response.body().getShowapi_res_body().getList().isEmpty()) {
                             mDiskCache.storyCacheObj(IMAGE_TYPE_KEY, response.body().getShowapi_res_body());
-                            callBacks.getSuccess( response.body().getShowapi_res_body());
+                            callBacks.getSuccess(response.body().getShowapi_res_body());
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ImageTypeResult> call, Throwable t) {
-                            callBacks.ShowFailMsg(t.getMessage());
+                        callBacks.ShowFailMsg(t.getMessage());
                     }
                 });
 
@@ -142,32 +150,43 @@ public class ApiDel {
         });
     }
 
-    public void getPretyGirl(final ApiDataReceiveCallback<PrettyGrilImage.ShowapiResBodyBean.PagebeanBean> callback, final String type, final String page){
+    /**
+     * 获取分类图片信息
+     *
+     * @param callback
+     * @param type
+     * @param page
+     */
+    public void getPretyGirl(final ApiDataReceiveCallback<PrettyGrilImage.ShowapiResBodyBean.PagebeanBean> callback, final String type, final String page) {
         final String PRETY_GIRL_CACHEKEY = "prety_girl";
         mPreloadExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                Type type1 = new TypeToken<PrettyGrilImage.ShowapiResBodyBean>() {}.getType();
-                CacheObj<PrettyGrilImage.ShowapiResBodyBean> Obj = mDiskCache.getCacheObj(PRETY_GIRL_CACHEKEY + type + page, type1);
+                Type type1 = new TypeToken<PrettyGrilImage.ShowapiResBodyBean.PagebeanBean>() {
+                }.getType();
+                CacheObj<PrettyGrilImage.ShowapiResBodyBean.PagebeanBean> Obj = mDiskCache.getCacheObj(PRETY_GIRL_CACHEKEY + type + page, type1);
+
                 if (Obj != null) {
                     if (Obj.getT() != null && !Obj.isOutOfDate(CacheTimeManager.PRETY_GIRL_CACHETIME)) {
-                        postResultToMainThread(callback, Obj.getT().getPagebean(), true ,null);
+                        postResultToMainThread(callback, Obj.getT(), true, null);
                         return;
                     }
                 }
                 apiService.getImage(type, page).enqueue(new Callback<PrettyGrilImage>() {
                     @Override
                     public void onResponse(Call<PrettyGrilImage> call, retrofit2.Response<PrettyGrilImage> response) {
-                        if (response.body() != null && !response.body().getShowapi_res_body().getPagebean().getContentlist().isEmpty()) {
-                            mDiskCache.storyCacheObj(PRETY_GIRL_CACHEKEY + type + page, response.body().getShowapi_res_body());
-                            postResultToMainThread(callback, response.body().getShowapi_res_body().getPagebean(), true, null);
+                        if (response.body() != null && !response.body().showapi_res_body.pagebean.contentlist.isEmpty()) {
+
+                            mDiskCache.storyCacheObj(PRETY_GIRL_CACHEKEY + type + page, response.body().showapi_res_body.pagebean);
+                            postResultToMainThread(callback, response.body().showapi_res_body.pagebean, true, null);
                             return;
+
                         }
                     }
-
                     @Override
                     public void onFailure(Call<PrettyGrilImage> call, Throwable t) {
-                            postResultToMainThread(callback, null, false, new Exception(t));
+
+                        postResultToMainThread(callback, null, false, new Exception(t));
                         return;
                     }
                 });

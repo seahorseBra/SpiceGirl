@@ -1,4 +1,4 @@
-package model.IModel;
+package model;
 
 /**
  * model接口基类

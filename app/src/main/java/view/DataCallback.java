@@ -1,4 +1,4 @@
-package view.view_interface;
+package view;
 
 /**
  * Created by mavin on 2016/5/29.

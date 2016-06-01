@@ -1,4 +1,4 @@
-package presenter.IPresenter;
+package view;
 
 /**
  * Created by zchao on 2016/5/30.

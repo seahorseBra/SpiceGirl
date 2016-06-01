@@ -1,4 +1,4 @@
-package presenter.IPresenter;
+package view;
 
 /**
  * 所有presenter基类

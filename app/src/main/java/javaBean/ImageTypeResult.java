@@ -117,6 +117,14 @@ public class ImageTypeResult {
                 public void setName(String name) {
                     this.name = name;
                 }
+
+                @Override
+                public String toString() {
+                    return "ImageType{" +
+                            "id=" + id +
+                            ", name='" + name + '\'' +
+                            '}';
+                }
             }
         }
     }

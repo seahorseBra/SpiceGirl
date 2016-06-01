@@ -1,13 +1,14 @@
 package model;
 
+
+import model.CallBacks;
+import model.IBaseModel;
+
 /**
  * Created by zchao on 2016/5/30.
  */
-public class ImageModel implements model.IModel.ImageModel{
+public interface ImageModel extends IBaseModel {
 
+    void downImage(String url, CallBacks callback);
 
-    @Override
-    public void downImage(String url, CallBacks callback) {
-
-    }
 }

@@ -19,8 +19,8 @@ public class MainPresenter extends BasePresenter<IMainView, MainModel> {
 
     private static final String TAG = "MainActivity";
 
-    public MainPresenter(Activity context, IMainView view, MainModel model) {
-        super(context, view, model);
+    public MainPresenter(Activity context, IMainView view) {
+        super(context, view, new MainModel());
     }
 
 

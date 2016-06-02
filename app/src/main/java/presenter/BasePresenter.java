@@ -16,6 +16,8 @@ public class BasePresenter<G extends IBaseView, M extends IBaseModel> implements
 
     protected M mModel;
 
+    public BasePresenter() {
+    }
     public BasePresenter(Activity context, G view, M model) {
         mContext = context;
         mView = view;

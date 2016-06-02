@@ -2,6 +2,7 @@ package view;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ScrollView;
 
 import com.mavin.spicegirl.R;
 
@@ -13,31 +14,31 @@ import presenter.MainPresenter;
 public class MainActivity extends BaseActivity<MainPresenter> implements IMainView {
 
     private static final String TAG = "MainActivity";
-    private static int page = 2;
     private static int type = 4002;
+    private static int page = 2;
+    private ScrollView mScroll;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        useImmerseStatuBar(true);
+        setTitle("wge");
+        mToolBar.setLogo(R.mipmap.ic_launcher);
         setContentView(R.layout.activity_main);
-//        mPresenter.getAllImageType();
-        getMoreData();
+        mScroll = (ScrollView) findViewById(R.id.scroll_view);
+
+
     }
 
     @Override
     protected void initePresenter() {
-        mPresenter = new MainPresenter(this, this, new MainModel());
+        mPresenter = new MainPresenter(this, this);
     }
 
 
     @Override
     public void addAllImageType(ImageTypeResult.ShowapiResBodyBean.ListBean listBean) {
-        if (listBean == null) {
-            return;
-        }
-        for (int i = 0; i < listBean.getList().size(); i++) {
 
-
-        }
     }
 
     @Override
@@ -58,7 +59,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     @Override
     public void addPrettyGirlDate(PrettyGrilImage.ShowapiResBodyBean.PagebeanBean pagebeanBean) {
         for (int i = 0; i < pagebeanBean.contentlist.size(); i++) {
-            Log.d(TAG, "addPrettyGirlDate() called with: " + "pagebeanBean = [" + pagebeanBean.contentlist.get(i).list.get(0).big+ "]");
+            Log.d(TAG, "addPrettyGirlDate() called with: " + "pagebeanBean = [" + pagebeanBean.contentlist.get(i).list.get(0).big + "]");
         }
     }
 }

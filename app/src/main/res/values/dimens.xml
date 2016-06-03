@@ -2,4 +2,22 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="bigIcon_height">48dp</dimen>
+    <dimen name="bigIcon_wight">48dp</dimen>
+
+    <dimen name="smallIcon_height">24dp</dimen>
+    <dimen name="smallIcon_wight">24dp</dimen>
+
+    <dimen name="smallIcon_margin">4dp</dimen>
+
+    <dimen name="corner_radius">2dp</dimen>
+
+    //文字大小
+    <dimen name="small_textSize">12sp</dimen>
+    <dimen name="normal_textSize">14sp</dimen>
+    <dimen name="smallTitle_textSize">16sp</dimen>
+    <dimen name="bigTitle_textSize">24sp</dimen>
+    <dimen name="appbar_textSize">20sp</dimen>
+
 </resources>

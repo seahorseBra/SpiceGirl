@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.mavin.spicegirl.R;
+
 import core.ApiDel;
 
 /**
@@ -14,6 +16,7 @@ public class CApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        setTheme(R.style.AppTheme1);
         mContext = getApplicationContext();
         initeSharedPrefrence();
         ApiDel.newInstance().initeApiDel(mContext);

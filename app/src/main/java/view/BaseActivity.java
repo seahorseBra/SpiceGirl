@@ -23,6 +23,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        setTheme(R.style.AppTheme1);
         useImmerseStatuBar(false);
         initePresenter();
         super.setContentView(R.layout.base_activity_layout);

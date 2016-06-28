@@ -12,6 +12,7 @@
     <color name="normal_W_textColor">#FFFFFFFF</color>
     <color name="dodge_W_textColor">#B2FFFFFF</color>
     <color name="disable_W_textColor">#4CFFFFFF</color>
+    <color name="disable_W_textColor1">#4CFF0000</color>
 
     //分割线颜色
     <color name="division_B_lineColor">#B6B6B6</color>
@@ -22,5 +23,6 @@
     <color name="icon_W_nomalColor">#FFFFFFFF</color>
     <color name="icon_W_disableColor">#6FFFFFFF</color>
 
+    <attr name="appbg" format="reference"/>
 
 </resources>

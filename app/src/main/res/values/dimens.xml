@@ -9,6 +9,7 @@
     <dimen name="smallIcon_margin">4dp</dimen>
     <dimen name="card_corner_radius">2dp</dimen>
     <dimen name="view_normalSize">56dp</dimen>
+    <dimen name="icon_clickAre">48dp</dimen>
 
     //各种距离大小
     <dimen name="topStatusBar_height">24dp</dimen>
